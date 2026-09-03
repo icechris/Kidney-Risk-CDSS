@@ -100,7 +100,7 @@ export default function ReportsAnalytics() {
       title="System Reports & Analytics"
       subtitle="CDSS Population Demographics and System Throughput Statistics"
       actions={
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Button variant="secondary" size="sm">
             <FileText className="size-3.5" />
             Export PDF
@@ -112,10 +112,10 @@ export default function ReportsAnalytics() {
         </div>
       }
     >
-      <div className="flex items-start gap-5">
-        <Card className="flex flex-1 flex-col gap-3 p-5">
+      <div className="grid grid-cols-2 gap-4 lg:flex lg:items-start lg:gap-5">
+        <Card className="flex flex-col gap-3 p-5 lg:flex-1">
           <p className="text-[13px] font-semibold text-slate-600">Total Reports Run</p>
-          <div className="flex items-end justify-between">
+          <div className="flex items-end justify-between gap-2">
             <div className="flex flex-col gap-1">
               <p className="text-[28px] font-bold text-slate-900">3,421</p>
               <p className="text-[11px] text-slate-400">All periods</p>
@@ -123,9 +123,9 @@ export default function ReportsAnalytics() {
             <Sparkline data={sparklineTrends.reports} color="#2563eb" />
           </div>
         </Card>
-        <Card className="flex flex-1 flex-col gap-3 p-5">
+        <Card className="flex flex-col gap-3 p-5 lg:flex-1">
           <p className="text-[13px] font-semibold text-slate-600">Mean Patient Risk Score</p>
-          <div className="flex items-end justify-between">
+          <div className="flex items-end justify-between gap-2">
             <div className="flex flex-col gap-1">
               <p className="text-[28px] font-bold text-slate-900">11.4%</p>
               <p className="text-[11px] text-slate-400">Median 6.8%</p>
@@ -133,9 +133,9 @@ export default function ReportsAnalytics() {
             <Sparkline data={sparklineTrends.risk} color="#dc2626" />
           </div>
         </Card>
-        <Card className="flex flex-1 flex-col gap-3 p-5">
+        <Card className="flex flex-col gap-3 p-5 lg:flex-1">
           <p className="text-[13px] font-semibold text-slate-600">Most Common Etiology</p>
-          <div className="flex items-end justify-between">
+          <div className="flex items-end justify-between gap-2">
             <div className="flex flex-col gap-1">
               <p className="text-[22px] font-bold leading-tight text-slate-900">{etiology.top}</p>
               <p className="text-[11px] text-slate-400">{etiology.pct}% of cohort</p>
@@ -143,9 +143,9 @@ export default function ReportsAnalytics() {
             <Sparkline data={sparklineTrends.etiology} color="#2563eb" />
           </div>
         </Card>
-        <Card className="flex flex-1 flex-col gap-3 p-5">
+        <Card className="flex flex-col gap-3 p-5 lg:flex-1">
           <p className="text-[13px] font-semibold text-slate-600">CDSS Utilization Rate</p>
-          <div className="flex items-end justify-between">
+          <div className="flex items-end justify-between gap-2">
             <div className="flex flex-col gap-1">
               <p className="text-[28px] font-bold text-slate-900">98.8%</p>
               <p className="text-[11px] text-slate-400">Target reached</p>
@@ -175,7 +175,7 @@ export default function ReportsAnalytics() {
         </div>
       </Card>
 
-      <div className="flex items-start gap-5">
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
         <Card className="flex flex-1 flex-col gap-4 p-6">
           <p className="text-[15px] font-bold text-slate-900">Cohort Risk Distribution by Age Group</p>
           <div className="flex flex-col gap-3">
@@ -224,18 +224,22 @@ export default function ReportsAnalytics() {
           {recentReports.map((r) => (
             <div
               key={r.name}
-              className="flex w-full items-center gap-4 border-b border-slate-100 py-3 last:border-b-0"
+              className="flex w-full flex-col gap-3 border-b border-slate-100 py-3 last:border-b-0 lg:flex-row lg:items-center lg:gap-4"
             >
-              <File className="size-5 shrink-0 text-slate-400" />
-              <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                <p className="truncate text-[13px] font-semibold text-slate-900">{r.name}</p>
-                <p className="text-[11px] text-slate-400">{r.meta}</p>
+              <div className="flex min-w-0 items-center gap-4 lg:contents">
+                <File className="size-5 shrink-0 text-slate-400" />
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                  <p className="truncate text-[13px] font-semibold text-slate-900">{r.name}</p>
+                  <p className="text-[11px] text-slate-400">{r.meta}</p>
+                </div>
               </div>
-              <p className="w-[120px] shrink-0 text-[13px] text-slate-600">{r.date}</p>
-              <Button variant="secondary" size="sm">
-                <Download className="size-3.5" />
-                Download
-              </Button>
+              <div className="flex items-center justify-between gap-3 pl-9 lg:contents lg:pl-0">
+                <p className="text-[13px] text-slate-600 lg:w-[120px] lg:shrink-0">{r.date}</p>
+                <Button variant="secondary" size="sm">
+                  <Download className="size-3.5" />
+                  Download
+                </Button>
+              </div>
             </div>
           ))}
         </div>

@@ -63,14 +63,14 @@ export default function Settings() {
 
   return (
     <AppShell title="System Settings" subtitle="Clinical Risk Thresholds & Model Parameters">
-      <div className="flex items-start gap-6">
-        <div className="flex w-[200px] shrink-0 flex-col gap-1">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+        <div className="flex w-full gap-2 overflow-x-auto pb-1 lg:w-[200px] lg:shrink-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0">
           {tabs.map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
               className={cn(
-                'rounded-md px-3 py-2.5 text-left text-[13px] font-semibold transition-colors',
+                'shrink-0 whitespace-nowrap rounded-md px-3 py-2.5 text-left text-[13px] font-semibold transition-colors',
                 tab === t ? 'bg-blue-50 text-blue-600' : 'text-slate-600 hover:bg-slate-100',
               )}
             >
@@ -86,7 +86,7 @@ export default function Settings() {
               <p className="text-xs text-slate-600">
                 Basic institutional details shown across the CDSS platform.
               </p>
-              <div className="flex gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row">
                 <Field label="Institution Name">
                   <input
                     value={institution}
@@ -128,7 +128,7 @@ export default function Settings() {
               </p>
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
-                  <div className="flex items-center justify-between text-[13px]">
+                  <div className="flex flex-col gap-1 text-[13px] sm:flex-row sm:items-center sm:justify-between sm:gap-2">
                     <p className="font-semibold text-slate-900">Low Risk (Standard Monitoring)</p>
                     <p className="font-bold text-risk-low-fg">0% - {clampedLow}%</p>
                   </div>
@@ -145,7 +145,7 @@ export default function Settings() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <div className="flex items-center justify-between text-[13px]">
+                  <div className="flex flex-col gap-1 text-[13px] sm:flex-row sm:items-center sm:justify-between sm:gap-2">
                     <p className="font-semibold text-slate-900">
                       Moderate Risk (Urinary Biomarker Retests)
                     </p>
@@ -167,7 +167,7 @@ export default function Settings() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <div className="flex items-center justify-between text-[13px]">
+                  <div className="flex flex-col gap-1 text-[13px] sm:flex-row sm:items-center sm:justify-between sm:gap-2">
                     <p className="font-semibold text-slate-900">
                       High Risk (Nephrology CDSS Immediate Alert)
                     </p>
@@ -185,7 +185,7 @@ export default function Settings() {
           {tab === 'Model Configuration' && (
             <Card className="flex flex-col gap-5 p-6">
               <p className="text-[15px] font-bold text-slate-900">Bayesian Inference Engine Configuration</p>
-              <div className="flex gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row">
                 <Field label="Primary Classifier Algorithm">
                   <select
                     value={classifier}
@@ -222,7 +222,7 @@ export default function Settings() {
           {tab === 'Security & Privacy' && (
             <Card className="flex flex-col gap-5 p-6">
               <p className="text-[15px] font-bold text-slate-900">Security Controls</p>
-              <div className="flex gap-8">
+              <div className="flex flex-col gap-4 sm:flex-row sm:gap-8">
                 <Field label="Inactivity Session Timeout (minutes)">
                   <select
                     value={sessionTimeout}
@@ -312,7 +312,7 @@ export default function Settings() {
             </Card>
           )}
 
-          <div className="flex justify-end gap-3">
+          <div className="flex flex-wrap justify-end gap-3">
             <Button variant="secondary">Reset to Defaults</Button>
             <Button>Save Changes</Button>
           </div>

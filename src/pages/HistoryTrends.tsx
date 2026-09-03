@@ -78,9 +78,9 @@ export default function HistoryTrends() {
         <p className="font-medium text-slate-600">History &amp; Trends</p>
       </div>
 
-      <div className="flex w-full items-center justify-between pb-2">
+      <div className="flex w-full flex-col gap-3 pb-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-[15px] font-bold text-slate-900">Population Risk Trend</p>
-        <div className="flex items-center gap-1 rounded-lg bg-slate-100 p-1">
+        <div className="flex items-center gap-1 self-start rounded-lg bg-slate-100 p-1 sm:self-auto">
           {ranges.map((r) => (
             <button
               key={r}
@@ -98,8 +98,8 @@ export default function HistoryTrends() {
       </div>
 
       <Card className="flex w-full flex-col gap-5 p-6">
-        <div className="flex w-full items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap items-center gap-2">
             <p className="text-base font-bold text-slate-900">6-Month Risk Category Trend</p>
             {highDelta > 0 && (
               <span className="flex items-center gap-1 rounded bg-red-100 px-2 py-0.5 text-[11px] font-bold text-red-600">
@@ -155,8 +155,8 @@ export default function HistoryTrends() {
         </div>
       </Card>
 
-      <div className="flex w-full items-start gap-5">
-        <Card className="flex flex-1 flex-col gap-5 p-6">
+      <div className="flex w-full flex-col gap-5 lg:flex-row lg:items-start">
+        <Card className="flex w-full flex-col gap-5 p-6 lg:flex-1">
           <p className="text-base font-bold text-slate-900">Average eGFR by Risk Category</p>
           <div className="h-[200px] w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -186,7 +186,7 @@ export default function HistoryTrends() {
           </div>
         </Card>
 
-        <Card className="flex w-[380px] shrink-0 flex-col gap-5 p-6">
+        <Card className="flex w-full flex-col gap-5 p-6 lg:w-[380px] lg:shrink-0">
           <p className="text-base font-bold text-slate-900">Risk Category Distribution</p>
           <div className="flex w-full flex-col gap-4">
             {riskCounts.map((r) => {
@@ -213,13 +213,13 @@ export default function HistoryTrends() {
       </div>
 
       <Card className="flex w-full flex-col p-0">
-        <div className="flex w-full items-center justify-between border-b border-slate-200 p-6 pb-4">
+        <div className="flex w-full flex-wrap items-center justify-between gap-2 border-b border-slate-200 p-6 pb-4">
           <p className="text-base font-bold text-slate-900">Top High-Risk Patients</p>
           <Link to="/patients" className="text-[13px] font-semibold text-blue-600 hover:underline">
             View All Patients
           </Link>
         </div>
-        <div className="flex w-full border-b border-slate-200 bg-slate-50 px-6 py-2.5 text-xs font-semibold text-slate-600">
+        <div className="hidden w-full border-b border-slate-200 bg-slate-50 px-6 py-2.5 text-xs font-semibold text-slate-600 lg:flex">
           <p className="flex-1">Patient</p>
           <p className="w-[120px]">MRN</p>
           <p className="w-[130px]">Last Assessed</p>
@@ -231,16 +231,36 @@ export default function HistoryTrends() {
           <Link
             key={a.id}
             to={`/patients/${a.patientId}`}
-            className="flex w-full items-center border-b border-slate-200 px-6 py-3 last:border-b-0 hover:bg-slate-50"
+            className="flex w-full flex-col gap-2 border-b border-slate-200 p-3 last:border-b-0 hover:bg-slate-50 lg:flex-row lg:items-center lg:gap-0 lg:px-6 lg:py-3"
           >
-            <p className="flex-1 text-[13px] font-semibold text-slate-900">{a.patientName}</p>
-            <p className="w-[120px] text-[13px] text-slate-600">{a.mrn}</p>
-            <p className="w-[130px] text-[13px] text-slate-600">{a.date}</p>
-            <p className="w-[130px] text-[13px] text-slate-600">{a.clinician}</p>
-            <div className="w-[120px]">
+            <div className="flex w-full items-center justify-between gap-2 lg:hidden">
+              <p className="truncate pr-2 text-[13px] font-semibold text-slate-900">
+                {a.patientName}
+              </p>
               <RiskBadge level={a.riskLevel} />
             </div>
-            <p className="w-[100px] text-[13px] font-bold" style={{ color: riskColor[a.riskLevel] }}>
+            <div className="flex w-full items-center justify-between gap-2 lg:hidden">
+              <p className="text-xs text-slate-500">
+                {a.mrn} · {a.date} · {a.clinician}
+              </p>
+              <p className="text-[13px] font-bold" style={{ color: riskColor[a.riskLevel] }}>
+                {a.riskScore}%
+              </p>
+            </div>
+
+            <p className="hidden flex-1 text-[13px] font-semibold text-slate-900 lg:block">
+              {a.patientName}
+            </p>
+            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[120px]">{a.mrn}</p>
+            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[130px]">{a.date}</p>
+            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[130px]">{a.clinician}</p>
+            <div className="hidden lg:block lg:w-[120px]">
+              <RiskBadge level={a.riskLevel} />
+            </div>
+            <p
+              className="hidden text-[13px] font-bold lg:block lg:w-[100px]"
+              style={{ color: riskColor[a.riskLevel] }}
+            >
               {a.riskScore}%
             </p>
           </Link>

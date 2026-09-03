@@ -72,7 +72,7 @@ export default function ModelPerformance() {
       title="Bayesian Engine Performance Monitor"
       subtitle="Deep Validation Audit Console · Operational Inference Parameters"
     >
-      <div className="grid w-full grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 lg:gap-5">
         {metrics.map((m) => (
           <Card key={m.label} className="flex flex-col gap-2 p-4">
             <p className="text-xs font-semibold text-slate-600">{m.label}</p>
@@ -85,43 +85,55 @@ export default function ModelPerformance() {
         ))}
       </div>
 
-      <div className="flex items-start gap-5">
-        <Card className="flex flex-1 flex-col gap-5 p-6">
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
+        <Card className="flex flex-1 flex-col gap-5 p-4 lg:p-6">
           <p className="text-[15px] font-bold text-slate-900">
             Confusion Matrix (Validation Cohort n=10,000)
           </p>
-          <div className="flex flex-col items-center gap-px">
-            <div className="flex gap-1 text-[11px] font-bold text-slate-600">
-              <span className="w-[100px]" />
-              <span className="w-[120px] text-center">Predicted Positive</span>
-              <span className="w-[120px] text-center">Predicted Negative</span>
+          <div className="flex flex-col items-center gap-px overflow-x-auto">
+            <div className="flex gap-1 text-[10px] font-bold text-slate-600 sm:text-[11px]">
+              <span className="w-[64px] sm:w-[100px]" />
+              <span className="w-[90px] text-center sm:w-[120px]">Predicted Positive</span>
+              <span className="w-[90px] text-center sm:w-[120px]">Predicted Negative</span>
             </div>
             <div className="flex items-center gap-1 py-1">
-              <p className="w-[100px] text-[11px] font-bold text-slate-600">Actual Pos</p>
-              <div className="flex h-[60px] w-[120px] flex-col items-center justify-center rounded bg-emerald-50 text-emerald-600">
-                <p className="text-lg font-bold">{confusionMatrix.truePositive.toLocaleString()}</p>
-                <p className="text-[10px]">True Positive (TP)</p>
+              <p className="w-[64px] text-[10px] font-bold text-slate-600 sm:w-[100px] sm:text-[11px]">
+                Actual Pos
+              </p>
+              <div className="flex h-[54px] w-[90px] flex-col items-center justify-center rounded bg-emerald-50 text-emerald-600 sm:h-[60px] sm:w-[120px]">
+                <p className="text-base font-bold sm:text-lg">
+                  {confusionMatrix.truePositive.toLocaleString()}
+                </p>
+                <p className="text-[9px] sm:text-[10px]">True Positive (TP)</p>
               </div>
-              <div className="flex h-[60px] w-[120px] flex-col items-center justify-center rounded bg-red-50 text-red-600">
-                <p className="text-lg font-bold">{confusionMatrix.falseNegative.toLocaleString()}</p>
-                <p className="text-[10px]">False Negative (FN)</p>
+              <div className="flex h-[54px] w-[90px] flex-col items-center justify-center rounded bg-red-50 text-red-600 sm:h-[60px] sm:w-[120px]">
+                <p className="text-base font-bold sm:text-lg">
+                  {confusionMatrix.falseNegative.toLocaleString()}
+                </p>
+                <p className="text-[9px] sm:text-[10px]">False Negative (FN)</p>
               </div>
             </div>
             <div className="flex items-center gap-1 py-1">
-              <p className="w-[100px] text-[11px] font-bold text-slate-600">Actual Neg</p>
-              <div className="flex h-[60px] w-[120px] flex-col items-center justify-center rounded bg-red-50 text-red-600">
-                <p className="text-lg font-bold">{confusionMatrix.falsePositive.toLocaleString()}</p>
-                <p className="text-[10px]">False Positive (FP)</p>
+              <p className="w-[64px] text-[10px] font-bold text-slate-600 sm:w-[100px] sm:text-[11px]">
+                Actual Neg
+              </p>
+              <div className="flex h-[54px] w-[90px] flex-col items-center justify-center rounded bg-red-50 text-red-600 sm:h-[60px] sm:w-[120px]">
+                <p className="text-base font-bold sm:text-lg">
+                  {confusionMatrix.falsePositive.toLocaleString()}
+                </p>
+                <p className="text-[9px] sm:text-[10px]">False Positive (FP)</p>
               </div>
-              <div className="flex h-[60px] w-[120px] flex-col items-center justify-center rounded bg-emerald-50 text-emerald-600">
-                <p className="text-lg font-bold">{confusionMatrix.trueNegative.toLocaleString()}</p>
-                <p className="text-[10px]">True Negative (TN)</p>
+              <div className="flex h-[54px] w-[90px] flex-col items-center justify-center rounded bg-emerald-50 text-emerald-600 sm:h-[60px] sm:w-[120px]">
+                <p className="text-base font-bold sm:text-lg">
+                  {confusionMatrix.trueNegative.toLocaleString()}
+                </p>
+                <p className="text-[9px] sm:text-[10px]">True Negative (TN)</p>
               </div>
             </div>
           </div>
         </Card>
 
-        <Card className="flex flex-1 flex-col gap-5 p-6">
+        <Card className="flex flex-1 flex-col gap-5 p-4 lg:p-6">
           <p className="text-[15px] font-bold text-slate-900">
             Receiver Operating Characteristic (ROC)
           </p>
@@ -167,18 +179,20 @@ export default function ModelPerformance() {
         </Card>
       </div>
 
-      <Card className="flex w-full flex-col gap-5 p-6">
+      <Card className="flex w-full flex-col gap-5 p-4 lg:p-6">
         <p className="text-[15px] font-bold text-slate-900">
           Predictive Feature Importance Scores (Bayesian Node Weights)
         </p>
         <div className="flex w-full flex-col gap-3">
           {featureImportance.map((f) => (
-            <div key={f.label} className="flex w-full items-center gap-4">
-              <p className="w-[180px] shrink-0 text-[13px] font-semibold text-slate-600">{f.label}</p>
+            <div key={f.label} className="flex w-full items-center gap-2 sm:gap-4">
+              <p className="w-[110px] shrink-0 text-xs font-semibold text-slate-600 sm:w-[180px] sm:text-[13px]">
+                {f.label}
+              </p>
               <div className="h-3 w-full overflow-hidden rounded-md bg-slate-100">
                 <div className="h-full rounded-md bg-blue-600" style={{ width: `${f.value}%` }} />
               </div>
-              <p className="w-[50px] shrink-0 text-right text-[13px] font-bold text-slate-900">
+              <p className="w-[38px] shrink-0 text-right text-xs font-bold text-slate-900 sm:w-[50px] sm:text-[13px]">
                 {f.value}%
               </p>
             </div>

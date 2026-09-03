@@ -81,19 +81,19 @@ export default function ClinicalAlerts() {
       title="Clinical Risk Alerts Console"
       subtitle="CDSS Real-Time Bayesian Inference Risk Triggers & Critical Flag Notifications"
       actions={
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Button variant="secondary" size="sm" onClick={markAllRead}>
             <Check className="size-3.5" />
-            Mark All Read
+            <span className="hidden sm:inline">Mark All Read</span>
           </Button>
           <Button variant="secondary" size="sm" onClick={() => navigate('/settings')}>
             <SettingsIcon className="size-3.5" />
-            Configure Alerts
+            <span className="hidden sm:inline">Configure Alerts</span>
           </Button>
         </div>
       }
     >
-      <div className="flex items-start gap-6">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
         <div className="flex min-w-0 flex-1 flex-col gap-4">
           <div className="flex flex-wrap items-center gap-3">
             <button
@@ -151,8 +151,8 @@ export default function ClinicalAlerts() {
                   className={cn('w-1.5 shrink-0 self-stretch rounded', severityMeta[alert.severity].dot)}
                 />
                 <div className="flex min-w-0 flex-1 flex-col gap-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
+                    <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-0.5">
                       <p className="text-sm font-bold text-blue-600">{alert.patientName}</p>
                       <p className="text-[11px] text-slate-400">MRN: {alert.mrn}</p>
                     </div>
@@ -169,7 +169,7 @@ export default function ClinicalAlerts() {
                     </div>
                   </div>
                   <p className="text-[13px] leading-relaxed text-slate-900">{alert.message}</p>
-                  <div className="flex gap-3 pt-1">
+                  <div className="flex flex-wrap gap-3 pt-1">
                     <Button size="sm" disabled={alert.resolved} onClick={() => resolveAlert(alert.id)}>
                       {alert.resolved ? 'Acknowledged' : 'Acknowledge'}
                     </Button>
@@ -186,7 +186,7 @@ export default function ClinicalAlerts() {
           </div>
         </div>
 
-        <Card className="flex w-[340px] shrink-0 flex-col gap-5 p-6">
+        <Card className="flex w-full flex-col gap-5 p-6 lg:w-[340px] lg:shrink-0">
           <p className="text-[15px] font-bold text-slate-900">Active Alert Severity Metrics</p>
           <div className="flex flex-col gap-4">
             {severityOrder.map((sev) => {

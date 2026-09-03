@@ -91,7 +91,7 @@ export default function AllAssessments() {
       subtitle="Operational CDSS History · All Saved & Completed Bayesian Risk Runs"
     >
       <Card className="flex w-full flex-col gap-4 p-5">
-        <div className="flex w-full items-start gap-4">
+        <div className="flex w-full flex-col gap-3 lg:flex-row lg:items-start lg:gap-4">
           <div className="flex flex-1 items-center gap-2 rounded-md border border-slate-200 px-3 py-2">
             <Search className="size-3.5 shrink-0 text-slate-400" />
             <input
@@ -101,61 +101,63 @@ export default function AllAssessments() {
               className="w-full text-[13px] text-slate-900 placeholder:text-slate-400 focus:outline-none"
             />
           </div>
-          <div className="relative w-[200px] shrink-0">
-            <select
-              value={dateFilter}
-              onChange={(e) => setDateFilter(e.target.value)}
-              className="w-full appearance-none rounded-md border border-slate-200 px-3 py-2 text-[13px] text-slate-600 focus:outline-none"
-            >
-              <option value="all">All Dates</option>
-              {uniqueDates.map((d) => (
-                <option key={d} value={d}>
-                  {d}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-slate-400" />
-          </div>
-          <div className="relative w-[180px] shrink-0">
-            <select
-              value={riskFilter}
-              onChange={(e) => setRiskFilter(e.target.value as RiskLevel | 'all')}
-              className="w-full appearance-none rounded-md border border-slate-200 px-3 py-2 text-[13px] text-slate-600 focus:outline-none"
-            >
-              {riskFilters.map((f) => (
-                <option key={f.value} value={f.value}>
-                  {f.label}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-slate-400" />
-          </div>
-          <div className="relative w-[160px] shrink-0">
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value as Assessment['status'] | 'all')}
-              className="w-full appearance-none rounded-md border border-slate-200 px-3 py-2 text-[13px] text-slate-600 focus:outline-none"
-            >
-              {statusFilters.map((f) => (
-                <option key={f.value} value={f.value}>
-                  {f.label}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-slate-400" />
+          <div className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto">
+            <div className="relative w-full sm:w-[200px] lg:shrink-0">
+              <select
+                value={dateFilter}
+                onChange={(e) => setDateFilter(e.target.value)}
+                className="w-full appearance-none rounded-md border border-slate-200 px-3 py-2 text-[13px] text-slate-600 focus:outline-none"
+              >
+                <option value="all">All Dates</option>
+                {uniqueDates.map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-slate-400" />
+            </div>
+            <div className="relative w-full sm:w-[180px] lg:shrink-0">
+              <select
+                value={riskFilter}
+                onChange={(e) => setRiskFilter(e.target.value as RiskLevel | 'all')}
+                className="w-full appearance-none rounded-md border border-slate-200 px-3 py-2 text-[13px] text-slate-600 focus:outline-none"
+              >
+                {riskFilters.map((f) => (
+                  <option key={f.value} value={f.value}>
+                    {f.label}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-slate-400" />
+            </div>
+            <div className="relative w-full sm:w-[160px] lg:shrink-0">
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value as Assessment['status'] | 'all')}
+                className="w-full appearance-none rounded-md border border-slate-200 px-3 py-2 text-[13px] text-slate-600 focus:outline-none"
+              >
+                {statusFilters.map((f) => (
+                  <option key={f.value} value={f.value}>
+                    {f.label}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-slate-400" />
+            </div>
           </div>
         </div>
 
         <div className="h-px w-full bg-slate-200" />
 
-        <div className="flex w-full items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="flex w-full flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-wrap items-center gap-3 lg:gap-4">
             {selected.size > 0 && (
               <>
                 <span className="rounded bg-blue-50 px-2 py-1 text-[11px] font-bold text-blue-600">
                   {selected.size} SELECTED
                 </span>
-                <span className="h-4 w-px bg-slate-200" />
+                <span className="hidden h-4 w-px bg-slate-200 sm:block" />
                 <button
                   className="flex items-center gap-2 text-[13px] font-semibold text-blue-600 hover:underline"
                   onClick={() => setSelected(new Set())}
@@ -165,7 +167,7 @@ export default function AllAssessments() {
                 </button>
                 <button
                   onClick={deleteDrafts}
-                  className="flex items-center gap-2 border-l border-slate-200 pl-4 text-[13px] font-semibold text-red-600 hover:underline"
+                  className="flex items-center gap-2 text-[13px] font-semibold text-red-600 hover:underline sm:border-l sm:border-slate-200 sm:pl-4"
                 >
                   <Trash2 className="size-3.5" />
                   Delete drafts
@@ -180,7 +182,7 @@ export default function AllAssessments() {
       </Card>
 
       <Card className="flex w-full flex-col overflow-hidden">
-        <div className="flex w-full items-center border-b border-slate-200 bg-slate-50 px-6 py-3 text-xs font-semibold text-slate-600">
+        <div className="hidden w-full items-center border-b border-slate-200 bg-slate-50 px-6 py-3 text-xs font-semibold text-slate-600 lg:flex">
           <div className="flex w-6 items-center">
             <input
               type="checkbox"
@@ -208,34 +210,58 @@ export default function AllAssessments() {
         {filtered.map((a) => (
           <div
             key={a.id}
-            className="flex w-full items-center border-b border-slate-100 px-6 py-4 last:border-b-0 hover:bg-slate-50"
+            className="flex w-full flex-col gap-2 border-b border-slate-100 px-4 py-3 last:border-b-0 hover:bg-slate-50 lg:flex-row lg:items-center lg:gap-0 lg:px-6 lg:py-4"
           >
-            <div className="flex w-6 items-center">
-              <input
-                type="checkbox"
-                checked={selected.has(a.id)}
-                onChange={() => toggleOne(a.id)}
-                className="size-3.5 rounded border-slate-300 accent-blue-600"
-              />
+            <div className="flex w-full items-center gap-3 lg:contents">
+              <div className="flex w-6 shrink-0 items-center lg:w-6">
+                <input
+                  type="checkbox"
+                  checked={selected.has(a.id)}
+                  onChange={() => toggleOne(a.id)}
+                  className="size-3.5 rounded border-slate-300 accent-blue-600"
+                />
+              </div>
+              <button
+                onClick={() => navigate(`/assessments/${a.id}/result`)}
+                className="shrink-0 text-left text-[13px] font-bold text-blue-600 hover:underline lg:w-[110px]"
+              >
+                {codeById.get(a.id)}
+              </button>
+              <button
+                onClick={() => navigate(`/patients/${a.patientId}`)}
+                className="min-w-0 flex-1 truncate text-left text-[13px] font-semibold text-slate-900 hover:underline lg:flex-1"
+              >
+                {a.patientName}
+              </button>
+              <RiskBadge level={a.riskLevel} className="shrink-0 lg:hidden" />
             </div>
-            <button
-              onClick={() => navigate(`/assessments/${a.id}/result`)}
-              className="w-[110px] text-left text-[13px] font-bold text-blue-600 hover:underline"
-            >
-              {codeById.get(a.id)}
-            </button>
-            <button
-              onClick={() => navigate(`/patients/${a.patientId}`)}
-              className="flex-1 text-left text-[13px] font-semibold text-slate-900 hover:underline"
-            >
-              {a.patientName}
-            </button>
-            <p className="w-[130px] text-[13px] text-slate-600">{a.date}</p>
-            <div className="w-[120px]">
+
+            <div className="flex items-center justify-between gap-2 pl-9 lg:hidden">
+              <p className="text-xs text-slate-500">
+                {a.date} · {a.status} · Score {a.riskScore}% · {a.clinician}
+              </p>
+              <div className="flex shrink-0 items-center gap-3">
+                <button
+                  onClick={() => navigate(`/assessments/${a.id}/result`)}
+                  aria-label="Open assessment result"
+                  className="text-slate-400 hover:text-blue-600"
+                >
+                  <ExternalLink className="size-4" />
+                </button>
+                <button aria-label="More actions" className="text-slate-400 hover:text-slate-600">
+                  <MoreVertical className="size-4" />
+                </button>
+              </div>
+            </div>
+
+            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[130px]">{a.date}</p>
+            <div className="hidden lg:block lg:w-[120px]">
               <RiskBadge level={a.riskLevel} />
             </div>
-            <p className="w-[100px] text-[13px] font-bold text-slate-900">{a.riskScore}%</p>
-            <div className="w-[120px]">
+            <p className="hidden text-[13px] font-bold text-slate-900 lg:block lg:w-[100px]">
+              {a.riskScore}%
+            </p>
+            <div className="hidden lg:block lg:w-[120px]">
               <span
                 className={cn(
                   'inline-flex items-center rounded-md px-2 py-1 text-[11px] font-semibold whitespace-nowrap',
@@ -245,8 +271,8 @@ export default function AllAssessments() {
                 {a.status}
               </span>
             </div>
-            <p className="w-[130px] text-[13px] text-slate-600">{a.clinician}</p>
-            <div className="flex w-[80px] items-center justify-end gap-3">
+            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[130px]">{a.clinician}</p>
+            <div className="hidden lg:flex lg:w-[80px] lg:items-center lg:justify-end lg:gap-3">
               <button
                 onClick={() => navigate(`/assessments/${a.id}/result`)}
                 aria-label="Open assessment result"

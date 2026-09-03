@@ -39,13 +39,13 @@ export default function ProfileSettings() {
 
   return (
     <AppShell title="My Clinical Profile" subtitle="Manage your credentials and security tokens">
-      <div className="flex items-start gap-6">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
         <Card className="flex min-w-0 flex-1 flex-col gap-6 p-6">
           <div className="flex items-center gap-5">
             <div className="flex size-20 shrink-0 items-center justify-center rounded-full bg-blue-500 text-2xl font-semibold text-white">
               {initials}
             </div>
-            <div className="flex flex-col gap-1.5">
+            <div className="flex min-w-0 flex-1 flex-col gap-1.5">
               <p className="text-[16px] font-bold text-slate-900">{currentUser.name}</p>
               <p className="text-xs text-slate-600">{currentUser.institution} · Dept of Nephrology</p>
               <Button variant="secondary" size="sm" className="w-fit">
@@ -57,7 +57,7 @@ export default function ProfileSettings() {
           <div className="h-px w-full bg-slate-200" />
 
           <div className="flex flex-col gap-4">
-            <div className="flex gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="flex flex-1 flex-col gap-1.5">
                 <p className="text-xs font-semibold text-slate-600">Full Name</p>
                 <input value={fullName} onChange={(e) => setFullName(e.target.value)} className={inputClass} />
@@ -72,7 +72,7 @@ export default function ProfileSettings() {
                 />
               </div>
             </div>
-            <div className="flex gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="flex flex-1 flex-col gap-1.5">
                 <p className="text-xs font-semibold text-slate-600">Phone Number</p>
                 <input value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} />
@@ -86,7 +86,7 @@ export default function ProfileSettings() {
                 />
               </div>
             </div>
-            <div className="flex gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="flex flex-1 flex-col gap-1.5">
                 <p className="text-xs font-semibold text-slate-600">Clinical Role (Read-only)</p>
                 <p className={readOnlyClass}>Consulting Nephrologist &amp; {currentUser.role}</p>
@@ -98,13 +98,13 @@ export default function ProfileSettings() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-3">
+          <div className="flex flex-wrap justify-end gap-3">
             <Button variant="secondary">Cancel</Button>
             <Button>Save Changes</Button>
           </div>
         </Card>
 
-        <div className="flex w-[420px] shrink-0 flex-col gap-6">
+        <div className="flex w-full flex-col gap-6 lg:w-[420px] lg:shrink-0">
           <Card className="flex flex-col gap-4 p-6">
             <p className="text-[15px] font-bold text-slate-900">Change Secure Password</p>
             <div className="flex flex-col gap-3">

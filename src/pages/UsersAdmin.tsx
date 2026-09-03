@@ -73,10 +73,10 @@ export default function UsersAdmin() {
 
   return (
     <AppShell title="Users & Access Control" subtitle="CDSS Security · Audit Logs Compliant">
-      <div className="flex items-start gap-6">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
         <Card className="flex min-w-0 flex-1 flex-col gap-5 p-6">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex flex-col gap-1">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex min-w-0 flex-col gap-1">
               <p className="text-[16px] font-bold text-slate-900">Registered Clinical Users</p>
               <p className="text-xs text-slate-600">
                 Currently authorized to access patient records and risk algorithms.
@@ -88,7 +88,7 @@ export default function UsersAdmin() {
             </Button>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <div className="flex flex-1 items-center gap-2 rounded-md border border-slate-200 px-3 py-2">
               <Search className="size-3.5 text-slate-400" />
               <input
@@ -101,7 +101,7 @@ export default function UsersAdmin() {
             <select
               value={roleFilter}
               onChange={(e) => setRoleFilter(e.target.value as typeof roleFilter)}
-              className="rounded-md border border-slate-200 px-3 py-2 text-[13px] text-slate-900 focus:outline-none"
+              className="w-full rounded-md border border-slate-200 px-3 py-2 text-[13px] text-slate-900 focus:outline-none sm:w-auto"
             >
               <option value="all">All Roles</option>
               {roles.map((r) => (
@@ -157,7 +157,7 @@ export default function UsersAdmin() {
           </div>
         </Card>
 
-        <div className="flex w-[380px] shrink-0 flex-col gap-6">
+        <div className="flex w-full flex-col gap-6 lg:w-[380px] lg:shrink-0">
           <Card className="flex flex-col gap-4 p-6">
             <p className="text-[15px] font-bold text-slate-900">Permission Matrix Preview</p>
             <p className="text-xs leading-relaxed text-slate-600">

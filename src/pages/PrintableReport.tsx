@@ -95,8 +95,8 @@ export default function PrintableReport() {
     .replace(/-/g, '')}`
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center gap-6 bg-slate-100 py-10">
-      <div className="flex w-[794px] items-center justify-between print:hidden">
+    <div className="flex min-h-screen w-full flex-col items-start gap-6 overflow-x-auto bg-slate-100 px-4 py-10 lg:items-center lg:px-0">
+      <div className="flex w-full max-w-[794px] flex-wrap items-center justify-between gap-3 print:hidden">
         <p className="text-sm text-slate-500">Printable A4 clinical report preview</p>
         <Button onClick={() => window.print()}>
           <Printer className="size-4" />
@@ -104,7 +104,7 @@ export default function PrintableReport() {
         </Button>
       </div>
 
-      <div className="flex w-[794px] flex-col gap-6 bg-white p-12 shadow-[0_4px_16px_rgba(0,0,0,0.08)] print:shadow-none">
+      <div className="flex w-[794px] shrink-0 flex-col gap-6 bg-white p-12 shadow-[0_4px_16px_rgba(0,0,0,0.08)] print:shadow-none">
         <div className="flex w-full items-center justify-between">
           <div className="flex flex-col gap-1">
             <p className="text-xl font-extrabold text-slate-900">UNIVERSITY HOSPITAL NEPHROLOGY</p>

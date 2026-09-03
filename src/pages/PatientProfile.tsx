@@ -184,8 +184,8 @@ export default function PatientProfile() {
         </Card>
       ) : (
         <>
-          <div className="flex w-full items-start gap-5">
-            <div className="flex flex-1 flex-col gap-5">
+          <div className="flex w-full flex-col gap-5 lg:flex-row lg:items-start">
+            <div className="flex w-full flex-1 flex-col gap-5">
               <Card className="flex w-full flex-col gap-4 p-5">
                 <p className="text-[15px] font-bold text-slate-900">
                   Primary Diagnoses &amp; Comorbidities
@@ -214,7 +214,7 @@ export default function PatientProfile() {
                   {prescriptions.map((rx) => (
                     <div
                       key={rx.name}
-                      className="flex w-full items-center justify-between rounded-md border border-slate-200 p-3"
+                      className="flex w-full flex-col gap-1 rounded-md border border-slate-200 p-3 sm:flex-row sm:items-center sm:justify-between sm:gap-2"
                     >
                       <div className="flex flex-col gap-0.5">
                         <p className="text-[13px] font-bold text-slate-900">{rx.name}</p>
@@ -227,7 +227,7 @@ export default function PatientProfile() {
               </Card>
             </div>
 
-            <div className="flex w-[420px] shrink-0 flex-col gap-5">
+            <div className="flex w-full flex-col gap-5 lg:w-[420px] lg:shrink-0">
               <Card className="flex w-full flex-col gap-3 p-5">
                 <p className="text-[15px] font-bold text-slate-900">Latest Bayesian Risk Level</p>
                 <div className="flex w-full items-center gap-4">
@@ -314,8 +314,8 @@ export default function PatientProfile() {
             <p className="text-[15px] font-bold text-slate-900">Historical Risk Progression</p>
             <div className="flex w-full flex-col gap-4">
               {timeline.map((t, i) => (
-                <div key={i} className="flex w-full items-start gap-4">
-                  <div className="flex w-[120px] shrink-0 flex-col gap-1">
+                <div key={i} className="flex w-full flex-col gap-2 sm:flex-row sm:items-start sm:gap-4">
+                  <div className="flex w-full items-center gap-2 sm:w-[120px] sm:shrink-0 sm:flex-col sm:items-start sm:gap-1">
                     <p className="text-[13px] font-bold text-slate-900">{t.date}</p>
                     <RiskBadge level={t.level} />
                   </div>

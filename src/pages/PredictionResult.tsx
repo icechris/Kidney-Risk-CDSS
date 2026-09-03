@@ -80,8 +80,8 @@ export default function PredictionResult() {
       title="Prediction Analysis Report"
       subtitle="Inference Engine: v3.2.1 · Generated on Oct 24, 2024"
     >
-      <Card className="flex w-full items-start gap-6 p-6">
-        <div className="relative flex size-[180px] shrink-0 flex-col items-center justify-center">
+      <Card className="flex w-full flex-col items-center gap-6 p-4 sm:p-6 lg:flex-row lg:items-start">
+        <div className="relative flex size-[160px] shrink-0 flex-col items-center justify-center sm:size-[180px]">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -108,8 +108,8 @@ export default function PredictionResult() {
           </div>
         </div>
 
-        <div className="flex flex-1 flex-col gap-4">
-          <div className="flex w-full items-start justify-between">
+        <div className="flex w-full flex-1 flex-col gap-4">
+          <div className="flex w-full flex-col items-start gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div className="flex flex-col gap-1">
               <p className="text-[22px] font-bold text-slate-900">{patient.name}</p>
               <p className="text-[13px] text-slate-600">
@@ -119,7 +119,7 @@ export default function PredictionResult() {
             <RiskBadge level={patient.riskLevel} />
           </div>
           <div className="h-px w-full bg-slate-200" />
-          <div className="flex w-full gap-8">
+          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-8">
             <div className="flex flex-col gap-1">
               <p className="text-xs uppercase text-slate-400">Computed Priors</p>
               <p className="text-sm font-semibold text-slate-900">
@@ -140,9 +140,9 @@ export default function PredictionResult() {
         </div>
       </Card>
 
-      <div className="flex w-full items-start gap-5">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:flex lg:items-start lg:gap-5">
         {(['low', 'moderate', 'high'] as RiskLevel[]).map((level) => (
-          <Card key={level} className="flex flex-1 flex-col gap-3 p-5">
+          <Card key={level} className="flex flex-col gap-3 p-5 lg:flex-1">
             <div className="flex w-full items-center justify-between">
               <p className="text-[13px] font-semibold text-slate-600 capitalize">
                 {level} Risk Probability
@@ -162,8 +162,8 @@ export default function PredictionResult() {
         ))}
       </div>
 
-      <div className="flex w-full items-start gap-5">
-        <Card className="flex flex-1 flex-col gap-5 p-6">
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
+        <Card className="flex w-full flex-col gap-5 p-4 sm:p-6 lg:flex-1">
           <div className="flex flex-col gap-1">
             <p className="text-[15px] font-bold text-slate-900">Top Clinical Risk Predictors</p>
             <p className="text-xs text-slate-600">
@@ -173,9 +173,11 @@ export default function PredictionResult() {
           <div className="flex w-full flex-col gap-4">
             {predictors.map((p) => (
               <div key={p.label} className="flex w-full flex-col gap-1.5">
-                <div className="flex w-full items-start justify-between text-[13px] font-semibold">
+                <div className="flex w-full flex-col gap-0.5 text-[13px] font-semibold sm:flex-row sm:items-start sm:justify-between sm:gap-2">
                   <p className="text-slate-900">{p.label}</p>
-                  <p style={{ color: p.color }}>+{p.influence}% Influence</p>
+                  <p className="shrink-0" style={{ color: p.color }}>
+                    +{p.influence}% Influence
+                  </p>
                 </div>
                 <div className="h-2 w-full overflow-hidden rounded bg-slate-50">
                   <div
@@ -188,19 +190,19 @@ export default function PredictionResult() {
           </div>
         </Card>
 
-        <div className="flex w-[460px] shrink-0 flex-col gap-5">
+        <div className="flex w-full flex-col gap-5 lg:w-[460px] lg:shrink-0">
           <Card className="flex w-full flex-col gap-3 p-5">
             <p className="text-sm font-bold text-slate-900">Inference Model Profile</p>
-            <div className="flex w-full flex-col gap-2 text-[13px]">
-              <div className="flex w-full items-start justify-between">
+            <div className="flex w-full flex-col gap-2.5 text-[13px]">
+              <div className="flex w-full flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between">
                 <p className="text-slate-600">Classifier Architecture</p>
                 <p className="font-semibold text-slate-900">Gaussian Naive Bayes</p>
               </div>
-              <div className="flex w-full items-start justify-between">
+              <div className="flex w-full flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between">
                 <p className="text-slate-600">Active Cohort Dataset</p>
                 <p className="font-semibold text-slate-900">N = 12,400 Patient Records</p>
               </div>
-              <div className="flex w-full items-start justify-between">
+              <div className="flex w-full flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between">
                 <p className="text-slate-600">Calibration Date</p>
                 <p className="font-semibold text-slate-900">September 2024</p>
               </div>
@@ -239,22 +241,30 @@ export default function PredictionResult() {
           </p>
         </div>
 
-        <div className="flex w-full items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Button variant="secondary" onClick={() => navigate(`/patients/${patient.id}`)}>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button
+              variant="secondary"
+              onClick={() => navigate(`/patients/${patient.id}`)}
+              className="w-full sm:w-auto"
+            >
               Back to Patient Profile
             </Button>
-            <Button variant="secondary" onClick={() => window.print()} className="gap-2">
+            <Button
+              variant="secondary"
+              onClick={() => window.print()}
+              className="w-full gap-2 sm:w-auto"
+            >
               <Printer className="size-3.5" />
               Print Summary
             </Button>
           </div>
-          <div className="flex items-center gap-3">
-            <Button variant="secondary" className="gap-2">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button variant="secondary" className="w-full gap-2 sm:w-auto">
               <Download className="size-3.5" />
               Download PDF Report
             </Button>
-            <Button size="lg" onClick={() => navigate('/assessments/new')}>
+            <Button size="lg" onClick={() => navigate('/assessments/new')} className="w-full sm:w-auto">
               New Assessment
             </Button>
           </div>
