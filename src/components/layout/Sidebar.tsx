@@ -1,39 +1,12 @@
-import {
-  AlertTriangle,
-  BarChart3,
-  HeartPulse,
-  HelpCircle,
-  LayoutDashboard,
-  LineChart,
-  Settings,
-  TestTube2,
-  UserRound,
-  Users,
-} from 'lucide-react'
+import { HeartPulse } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
-import { currentUser, clinicalAlerts } from '@/data/mockData'
+import { currentUser } from '@/data/mockData'
 import { cn } from '@/lib/utils'
-
-const navItems = [
-  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { to: '/assessments/new', label: 'New Assessment', icon: TestTube2 },
-  { to: '/patients', label: 'Patients', icon: UserRound },
-  { to: '/assessments', label: 'Assessments', icon: BarChart3 },
-  { to: '/reports', label: 'Reports', icon: LineChart },
-  {
-    to: '/alerts',
-    label: 'Alerts',
-    icon: AlertTriangle,
-    badge: clinicalAlerts.filter((a) => !a.resolved).length,
-  },
-  { to: '/admin/users', label: 'Users', icon: Users },
-  { to: '/settings', label: 'Settings', icon: Settings },
-  { to: '/help', label: 'Help', icon: HelpCircle },
-]
+import { navItems } from '@/components/layout/nav-items'
 
 export function Sidebar() {
   return (
-    <aside className="flex w-60 shrink-0 flex-col gap-6 self-stretch bg-navy-900 p-5">
+    <aside className="hidden w-60 shrink-0 flex-col gap-6 self-stretch bg-navy-900 p-5 lg:flex">
       <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">
           <div className="flex size-7 shrink-0 items-center justify-center rounded-md bg-blue-600">

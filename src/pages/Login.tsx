@@ -16,7 +16,7 @@ export default function Login() {
 
   return (
     <AuthLayout>
-      <div className="flex w-full max-w-[460px] flex-col gap-8 rounded-lg bg-white p-10 shadow-[0px_8px_12px_rgba(0,0,0,0.2)]">
+      <div className="flex w-full max-w-[460px] flex-col gap-6 rounded-lg bg-white p-6 shadow-[0px_8px_12px_rgba(0,0,0,0.2)] sm:gap-8 sm:p-10">
         <div className="flex flex-col items-center gap-3">
           <div className="flex size-12 items-center justify-center rounded-xl bg-blue-600">
             <HeartPulse className="size-7 text-white" />

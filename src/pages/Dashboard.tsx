@@ -35,7 +35,7 @@ export default function Dashboard() {
 
   return (
     <AppShell title="Clinical Risk Dashboard" subtitle="System Status: Operational · October 24, 2024">
-      <div className="flex items-start gap-5">
+      <div className="grid grid-cols-2 gap-4 lg:flex lg:items-start lg:gap-5">
         <StatCard label="Total Monitored" value="1,247" icon={TrendingUp} footer="+32 this week" />
         <StatCard label="Assessments Run" value="342" icon={TrendingUp} footer="+8 today" />
         <StatCard
@@ -56,8 +56,8 @@ export default function Dashboard() {
         />
       </div>
 
-      <div className="flex items-start gap-5">
-        <Card className="flex w-[420px] shrink-0 flex-col gap-5 p-6">
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
+        <Card className="flex w-full flex-col gap-5 p-6 lg:w-[420px] lg:shrink-0">
           <p className="text-[15px] font-bold text-slate-900">Bayesian Risk Distribution</p>
           <div className="relative h-[200px] w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -136,8 +136,8 @@ export default function Dashboard() {
         </Card>
       </div>
 
-      <div className="flex items-start gap-5">
-        <Card className="flex flex-1 flex-col gap-4 p-6">
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
+        <Card className="flex w-full flex-col gap-4 p-6 lg:flex-1">
           <div className="flex items-center justify-between">
             <p className="text-[15px] font-bold text-slate-900">Recent Active Assessments</p>
             <button
@@ -148,7 +148,7 @@ export default function Dashboard() {
             </button>
           </div>
           <div className="flex w-full flex-col">
-            <div className="flex w-full border-b border-slate-200 bg-slate-50 px-3 py-2.5 text-xs font-semibold text-slate-600">
+            <div className="hidden w-full border-b border-slate-200 bg-slate-50 px-3 py-2.5 text-xs font-semibold text-slate-600 lg:flex">
               <p className="flex-1">Patient Name</p>
               <p className="w-[120px]">ID Code / MRN</p>
               <p className="w-[120px]">Date Checked</p>
@@ -159,13 +159,21 @@ export default function Dashboard() {
               <button
                 key={a.id}
                 onClick={() => navigate(`/patients/${a.patientId}`)}
-                className="flex w-full items-center border-b border-slate-200 p-3 text-left last:border-b-0 hover:bg-slate-50"
+                className="flex w-full flex-col gap-2 border-b border-slate-200 p-3 text-left last:border-b-0 hover:bg-slate-50 lg:flex-row lg:items-center lg:gap-0"
               >
-                <p className="flex-1 text-[13px] font-semibold text-slate-900">{a.patientName}</p>
-                <p className="w-[120px] text-[13px] text-slate-600">{a.mrn}</p>
-                <p className="w-[120px] text-[13px] text-slate-600">{a.date}</p>
-                <p className="w-[120px] text-[13px] font-semibold text-slate-900">{a.egfr} ml/min</p>
-                <div className="w-[100px]">
+                <div className="flex w-full items-center justify-between gap-2 lg:contents">
+                  <p className="text-[13px] font-semibold text-slate-900 lg:flex-1">{a.patientName}</p>
+                  <RiskBadge level={a.riskLevel} className="lg:hidden" />
+                </div>
+                <p className="text-xs text-slate-500 lg:hidden">
+                  {a.mrn} · {a.date} · {a.egfr} ml/min
+                </p>
+                <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[120px]">{a.mrn}</p>
+                <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[120px]">{a.date}</p>
+                <p className="hidden text-[13px] font-semibold text-slate-900 lg:block lg:w-[120px]">
+                  {a.egfr} ml/min
+                </p>
+                <div className="hidden lg:block lg:w-[100px]">
                   <RiskBadge level={a.riskLevel} />
                 </div>
               </button>
@@ -173,7 +181,7 @@ export default function Dashboard() {
           </div>
         </Card>
 
-        <Card className="flex w-[460px] shrink-0 flex-col gap-4 p-6">
+        <Card className="flex w-full flex-col gap-4 p-6 lg:w-[460px] lg:shrink-0">
           <div className="flex items-center justify-between">
             <p className="text-[15px] font-bold text-slate-900">Active Clinical Alerts</p>
             <p className="text-[13px] text-slate-400">{unresolvedAlerts.length} unresolved</p>
@@ -202,10 +210,11 @@ export default function Dashboard() {
 
       <button
         onClick={() => navigate('/assessments/new')}
-        className="fixed bottom-8 right-8 flex items-center gap-2 rounded-full bg-blue-600 px-5 py-3.5 font-bold text-white shadow-[0_6px_8px_rgba(37,99,235,0.4)] hover:bg-blue-700"
+        className="fixed bottom-20 right-4 flex items-center gap-2 rounded-full bg-blue-600 px-4 py-3 font-bold text-white shadow-[0_6px_8px_rgba(37,99,235,0.4)] hover:bg-blue-700 lg:bottom-8 lg:right-8 lg:px-5 lg:py-3.5"
       >
         <Plus className="size-4" />
-        New Assessment
+        <span className="hidden sm:inline">New Assessment</span>
+        <span className="sm:hidden">New</span>
       </button>
     </AppShell>
   )
