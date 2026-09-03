@@ -18,7 +18,7 @@ export function StatCard({
   dotClassName?: string
 }) {
   return (
-    <Card className="flex flex-1 flex-col gap-3 p-5 shadow-[0_2px_2px_rgba(0,0,0,0.03)]">
+    <Card className="flex min-w-0 flex-1 flex-col gap-3 p-5 shadow-[0_2px_2px_rgba(0,0,0,0.03)]">
       <div className="flex items-center justify-between">
         <p className="text-[13px] font-semibold text-slate-600">{label}</p>
         <Icon className="size-4 text-slate-400" />

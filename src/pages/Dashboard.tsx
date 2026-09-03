@@ -95,7 +95,7 @@ export default function Dashboard() {
           </div>
         </Card>
 
-        <Card className="flex flex-1 flex-col gap-5 p-6">
+        <Card className="flex min-w-0 flex-1 flex-col gap-5 p-6">
           <div className="flex items-center justify-between">
             <p className="text-[15px] font-bold text-slate-900">6-Month Patient Transition Trend</p>
             <div className="flex items-center gap-3">
@@ -137,7 +137,7 @@ export default function Dashboard() {
       </div>
 
       <div className="flex flex-col gap-5 lg:flex-row lg:items-start">
-        <Card className="flex w-full flex-col gap-4 p-6 lg:flex-1">
+        <Card className="flex w-full min-w-0 flex-col gap-4 p-6 lg:flex-1">
           <div className="flex items-center justify-between">
             <p className="text-[15px] font-bold text-slate-900">Recent Active Assessments</p>
             <button

@@ -113,7 +113,7 @@ export default function ReportsAnalytics() {
       }
     >
       <div className="grid grid-cols-2 gap-4 lg:flex lg:items-start lg:gap-5">
-        <Card className="flex flex-col gap-3 p-5 lg:flex-1">
+        <Card className="flex min-w-0 flex-col gap-3 p-5 lg:flex-1">
           <p className="text-[13px] font-semibold text-slate-600">Total Reports Run</p>
           <div className="flex items-end justify-between gap-2">
             <div className="flex flex-col gap-1">
@@ -123,7 +123,7 @@ export default function ReportsAnalytics() {
             <Sparkline data={sparklineTrends.reports} color="#2563eb" />
           </div>
         </Card>
-        <Card className="flex flex-col gap-3 p-5 lg:flex-1">
+        <Card className="flex min-w-0 flex-col gap-3 p-5 lg:flex-1">
           <p className="text-[13px] font-semibold text-slate-600">Mean Patient Risk Score</p>
           <div className="flex items-end justify-between gap-2">
             <div className="flex flex-col gap-1">
@@ -133,7 +133,7 @@ export default function ReportsAnalytics() {
             <Sparkline data={sparklineTrends.risk} color="#dc2626" />
           </div>
         </Card>
-        <Card className="flex flex-col gap-3 p-5 lg:flex-1">
+        <Card className="flex min-w-0 flex-col gap-3 p-5 lg:flex-1">
           <p className="text-[13px] font-semibold text-slate-600">Most Common Etiology</p>
           <div className="flex items-end justify-between gap-2">
             <div className="flex flex-col gap-1">
@@ -143,7 +143,7 @@ export default function ReportsAnalytics() {
             <Sparkline data={sparklineTrends.etiology} color="#2563eb" />
           </div>
         </Card>
-        <Card className="flex flex-col gap-3 p-5 lg:flex-1">
+        <Card className="flex min-w-0 flex-col gap-3 p-5 lg:flex-1">
           <p className="text-[13px] font-semibold text-slate-600">CDSS Utilization Rate</p>
           <div className="flex items-end justify-between gap-2">
             <div className="flex flex-col gap-1">
