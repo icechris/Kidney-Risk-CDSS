@@ -33,7 +33,7 @@ export default function PatientsList() {
       title="Patient Registry"
       subtitle={`Total Patients Monitored: ${patients.length}`}
     >
-      <Card className="flex w-full items-center gap-4 p-4">
+      <Card className="flex w-full flex-col gap-4 p-4 sm:flex-row sm:items-center">
         <div className="flex flex-1 items-center gap-2 rounded-md border border-slate-200 px-3 py-2">
           <Search className="size-3.5 shrink-0 text-slate-400" />
           <input
@@ -43,7 +43,7 @@ export default function PatientsList() {
             className="w-full text-[13px] text-slate-900 placeholder:text-slate-400 focus:outline-none"
           />
         </div>
-        <div className="relative w-[200px] shrink-0">
+        <div className="relative w-full shrink-0 sm:w-[200px]">
           <select
             value={riskFilter}
             onChange={(e) => setRiskFilter(e.target.value as RiskLevel | 'all')}
@@ -59,7 +59,7 @@ export default function PatientsList() {
       </Card>
 
       <Card className="flex w-full flex-col">
-        <div className="flex w-full border-b border-slate-200 bg-slate-50 px-6 py-3 text-xs font-bold text-slate-600">
+        <div className="hidden w-full border-b border-slate-200 bg-slate-50 px-6 py-3 text-xs font-bold text-slate-600 lg:flex">
           <p className="w-[120px]">MRN</p>
           <p className="flex-1">Patient Name</p>
           <p className="w-[70px]">Age</p>
@@ -74,22 +74,56 @@ export default function PatientsList() {
           <button
             key={p.id}
             onClick={() => navigate(`/patients/${p.id}`)}
-            className="flex w-full items-center border-b border-slate-200 px-6 py-3 text-left last:border-b-0 hover:bg-slate-50"
+            className="flex w-full flex-col gap-2 border-b border-slate-200 p-3 text-left last:border-b-0 hover:bg-slate-50 lg:flex-row lg:items-center lg:gap-0 lg:px-6 lg:py-3"
           >
-            <p className="w-[120px] text-[13px] text-slate-600">{p.mrn}</p>
-            <p className="flex-1 truncate pr-2 text-[13px] font-semibold text-slate-900">
-              {p.name}
-            </p>
-            <p className="w-[70px] text-[13px] text-slate-600">{p.age}</p>
-            <p className="w-[90px] text-[13px] text-slate-600">{p.sex}</p>
-            <p className="w-[130px] text-[13px] text-slate-600">{p.lastCheckedAt}</p>
-            <div className="w-[140px]">
+            <div className="flex w-full items-center justify-between gap-2 lg:hidden">
+              <p className="truncate pr-2 text-[13px] font-semibold text-slate-900">{p.name}</p>
               <RiskBadge level={p.riskLevel} />
             </div>
-            <p className={`w-[90px] text-[13px] font-bold ${riskScoreColor[p.riskLevel]}`}>
+            <div className="flex w-full items-center justify-between gap-2 lg:hidden">
+              <p className="text-xs text-slate-500">
+                {p.mrn} · {p.age} {p.sex} · {p.lastCheckedAt}
+              </p>
+              <div className="flex shrink-0 items-center gap-2">
+                <span className={`text-[13px] font-bold ${riskScoreColor[p.riskLevel]}`}>
+                  {p.riskScore}%
+                </span>
+                <span
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    navigate(`/patients/${p.id}`)
+                  }}
+                  className="rounded p-1.5 hover:bg-slate-200"
+                >
+                  <Eye className="size-3.5 text-slate-500" />
+                </span>
+                <span
+                  onClick={(e) => e.stopPropagation()}
+                  className="rounded bg-slate-50 p-1.5 hover:bg-slate-200"
+                >
+                  <Pencil className="size-3.5 text-slate-500" />
+                </span>
+              </div>
+            </div>
+
+            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[120px]">{p.mrn}</p>
+            <p className="hidden flex-1 truncate pr-2 text-[13px] font-semibold text-slate-900 lg:block">
+              {p.name}
+            </p>
+            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[70px]">{p.age}</p>
+            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[90px]">{p.sex}</p>
+            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[130px]">
+              {p.lastCheckedAt}
+            </p>
+            <div className="hidden lg:block lg:w-[140px]">
+              <RiskBadge level={p.riskLevel} />
+            </div>
+            <p
+              className={`hidden text-[13px] font-bold lg:block lg:w-[90px] ${riskScoreColor[p.riskLevel]}`}
+            >
               {p.riskScore}%
             </p>
-            <div className="flex w-[90px] items-center justify-end gap-2">
+            <div className="hidden lg:flex lg:w-[90px] lg:items-center lg:justify-end lg:gap-2">
               <span
                 onClick={(e) => {
                   e.stopPropagation()
@@ -115,7 +149,7 @@ export default function PatientsList() {
           </p>
         )}
 
-        <div className="flex w-full items-center justify-between p-4">
+        <div className="flex w-full flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[13px] text-slate-600">
             Showing {filtered.length} of {patients.length} patients
           </p>

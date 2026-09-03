@@ -84,7 +84,7 @@ export default function NewAssessment() {
       title="New Bayesian Risk Assessment"
       subtitle="System Status: Operational · October 24, 2024"
     >
-      <Card className="flex w-full flex-col gap-8 p-8">
+      <Card className="flex w-full flex-col gap-6 p-4 sm:gap-8 sm:p-6 lg:p-8">
         <div className="flex flex-col gap-2 border-b border-slate-200 pb-6">
           <p className="text-lg font-bold text-slate-900">Patient Risk Input Profile</p>
           <p className="text-[13px] text-slate-600">
@@ -95,8 +95,8 @@ export default function NewAssessment() {
 
         <div className="flex w-full flex-col gap-4">
           <p className="text-sm font-bold uppercase text-blue-600">1. Patient Demographics</p>
-          <div className="flex w-full items-start gap-4">
-            <div className="flex flex-1 flex-col gap-1.5">
+          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:items-start">
+            <div className="flex flex-col gap-1.5">
               <FieldLabel>Search Registered Patient</FieldLabel>
               <div className="relative w-full">
                 <select
@@ -113,11 +113,11 @@ export default function NewAssessment() {
                 <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 size-3.5 -translate-y-1/2 text-slate-400" />
               </div>
             </div>
-            <div className="flex flex-1 flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5">
               <FieldLabel>Date of Birth</FieldLabel>
               <TextInput defaultValue="11 / 14 / 1968" />
             </div>
-            <div className="flex flex-1 flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5">
               <FieldLabel>Biological Gender</FieldLabel>
               <TextInput defaultValue="Female" />
             </div>
@@ -128,8 +128,8 @@ export default function NewAssessment() {
           <p className="text-sm font-bold uppercase text-blue-600">
             2. Comorbidities &amp; Medical History
           </p>
-          <div className="flex w-full items-center gap-6">
-            <div className="flex flex-1 flex-col gap-1.5">
+          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:items-center lg:gap-6">
+            <div className="flex flex-col gap-1.5">
               <FieldLabel>Diabetes Diagnosis</FieldLabel>
               <Select
                 defaultValue="Type 2 Diabetes (Well-controlled)"
@@ -141,23 +141,23 @@ export default function NewAssessment() {
                 ]}
               />
             </div>
-            <div className="flex flex-1 flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5">
               <FieldLabel>Hypertension Status</FieldLabel>
               <label className="flex w-full items-center gap-2.5 p-2.5">
                 <input
                   type="checkbox"
                   checked={hypertensive}
                   onChange={(e) => setHypertensive(e.target.checked)}
-                  className="size-[18px] rounded border-slate-300 accent-blue-600"
+                  className="size-[18px] shrink-0 rounded border-slate-300 accent-blue-600"
                 />
                 <span className="text-[13px] font-medium text-slate-900">
                   Hypertensive (Taking medication)
                 </span>
               </label>
             </div>
-            <div className="flex flex-1 flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5">
               <FieldLabel>Smoking History</FieldLabel>
-              <div className="flex items-center gap-4 p-2.5">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 p-2.5">
                 {(['Never', 'Former', 'Active'] as SmokingStatus[]).map((status) => (
                   <label key={status} className="flex items-center gap-1.5">
                     <input
@@ -185,19 +185,19 @@ export default function NewAssessment() {
 
         <div className="flex w-full flex-col gap-4">
           <p className="text-sm font-bold uppercase text-blue-600">3. Clinical Measurements</p>
-          <div className="flex w-full items-start gap-4">
-            <div className="flex flex-1 flex-col gap-1.5">
+          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:items-start">
+            <div className="flex flex-col gap-1.5">
               <FieldLabel>Blood Pressure (Systolic / Diastolic)</FieldLabel>
               <div className="flex w-full gap-2">
                 <UnitInput defaultValue="134" unit="mmHg" />
                 <UnitInput defaultValue="82" unit="mmHg" />
               </div>
             </div>
-            <div className="flex flex-1 flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5">
               <FieldLabel>BMI</FieldLabel>
               <UnitInput defaultValue="28.4" unit="kg/m²" />
             </div>
-            <div className="flex flex-1 flex-col gap-1.5">
+            <div className="flex flex-col gap-1.5">
               <FieldLabel>Heart Rate</FieldLabel>
               <UnitInput defaultValue="72" unit="bpm" />
             </div>
@@ -208,7 +208,7 @@ export default function NewAssessment() {
           <p className="text-sm font-bold uppercase text-blue-600">
             4. Laboratory Biomarkers &amp; Renal Panels
           </p>
-          <div className="grid w-full grid-cols-3 gap-x-4 gap-y-4">
+          <div className="grid w-full grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
             {labFields.map((f) => (
               <div key={f.label} className="flex flex-col gap-1.5">
                 <FieldLabel>{f.label}</FieldLabel>
@@ -231,14 +231,16 @@ export default function NewAssessment() {
           </div>
         </div>
 
-        <div className="flex w-full items-center justify-between border-t border-slate-200 pt-8">
-          <div className="flex items-center gap-3">
-            <Button variant="secondary">Save Draft</Button>
-            <Button variant="ghost" className="text-red-600 hover:bg-red-50">
+        <div className="flex w-full flex-col gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between sm:pt-8">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button variant="secondary" className="w-full sm:w-auto">
+              Save Draft
+            </Button>
+            <Button variant="ghost" className="w-full text-red-600 hover:bg-red-50 sm:w-auto">
               Reset Form
             </Button>
           </div>
-          <Button size="lg" onClick={handleRunPrediction} className="gap-2 px-6">
+          <Button size="lg" onClick={handleRunPrediction} className="w-full gap-2 px-6 sm:w-auto">
             <Play className="size-3.5" />
             Run Bayesian Prediction
           </Button>

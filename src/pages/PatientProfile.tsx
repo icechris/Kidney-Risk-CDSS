@@ -121,13 +121,13 @@ export default function PatientProfile() {
 
   return (
     <AppShell title="Patient Health Profile" subtitle={`${patient.mrn} · Active File`}>
-      <Card className="flex w-full items-center gap-6 p-6">
+      <Card className="flex w-full flex-col items-start gap-4 p-6 sm:flex-row sm:items-center sm:gap-6">
         <div className="flex size-16 shrink-0 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">
           {initials}
         </div>
-        <div className="flex flex-1 flex-col gap-1.5">
-          <div className="flex w-full items-center justify-between">
-            <div className="flex items-center gap-3">
+        <div className="flex w-full flex-1 flex-col gap-1.5">
+          <div className="flex w-full flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <p className="text-[22px] font-bold text-slate-900">{patient.name}</p>
               <p className="text-sm text-slate-600">
                 {patient.age} Year Old {patient.sex}
@@ -135,7 +135,7 @@ export default function PatientProfile() {
             </div>
             <RiskBadge level={patient.riskLevel} />
           </div>
-          <div className="flex w-full items-start gap-6 text-[13px] text-slate-600">
+          <div className="flex w-full flex-col gap-1 text-[13px] text-slate-600 sm:flex-row sm:items-start sm:gap-6">
             <p>
               MRN: <span className="font-semibold text-slate-900">{patient.mrn}</span>
             </p>
@@ -149,13 +149,13 @@ export default function PatientProfile() {
         </div>
       </Card>
 
-      <div className="flex w-full items-start gap-2 border-b border-slate-200">
+      <div className="flex w-full items-start gap-2 overflow-x-auto border-b border-slate-200">
         {tabs.map((t) =>
           t === 'Lab Trends' ? (
             <Link
               key={t}
               to="/history"
-              className="px-4 py-3 text-sm font-medium text-slate-600 hover:text-blue-600"
+              className="shrink-0 whitespace-nowrap px-4 py-3 text-sm font-medium text-slate-600 hover:text-blue-600"
             >
               {t}
             </Link>
@@ -163,7 +163,7 @@ export default function PatientProfile() {
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`px-4 py-3 text-sm ${
+              className={`shrink-0 whitespace-nowrap px-4 py-3 text-sm ${
                 tab === t
                   ? 'border-b-[3px] border-blue-600 font-bold text-blue-600'
                   : 'font-medium text-slate-600 hover:text-slate-900'
