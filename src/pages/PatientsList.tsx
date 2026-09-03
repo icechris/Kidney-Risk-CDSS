@@ -59,35 +59,78 @@ export default function PatientsList() {
       </Card>
 
       <Card className="flex w-full flex-col">
-        <div className="hidden w-full border-b border-slate-200 bg-slate-50 px-6 py-3 text-xs font-bold text-slate-600 lg:flex">
-          <p className="w-[120px]">MRN</p>
-          <p className="flex-1">Patient Name</p>
-          <p className="w-[70px]">Age</p>
-          <p className="w-[90px]">Gender</p>
-          <p className="w-[130px]">Last Assessed</p>
-          <p className="w-[140px]">Risk Category</p>
-          <p className="w-[90px]">Risk Score</p>
-          <p className="w-[90px] text-right">Actions</p>
-        </div>
+        <div className="lg:overflow-x-auto">
+          <div className="hidden w-full border-b border-slate-200 bg-slate-50 px-6 py-3 text-xs font-bold text-slate-600 lg:flex lg:min-w-[900px]">
+            <p className="shrink-0 lg:w-[120px]">MRN</p>
+            <p className="min-w-[140px] flex-1">Patient Name</p>
+            <p className="shrink-0 lg:w-[70px]">Age</p>
+            <p className="shrink-0 lg:w-[90px]">Gender</p>
+            <p className="shrink-0 lg:w-[130px]">Last Assessed</p>
+            <p className="shrink-0 lg:w-[140px]">Risk Category</p>
+            <p className="shrink-0 lg:w-[90px]">Risk Score</p>
+            <p className="shrink-0 text-right lg:w-[90px]">Actions</p>
+          </div>
 
-        {filtered.map((p) => (
-          <button
-            key={p.id}
-            onClick={() => navigate(`/patients/${p.id}`)}
-            className="flex w-full flex-col gap-2 border-b border-slate-200 p-3 text-left last:border-b-0 hover:bg-slate-50 lg:flex-row lg:items-center lg:gap-0 lg:px-6 lg:py-3"
-          >
-            <div className="flex w-full items-center justify-between gap-2 lg:hidden">
-              <p className="truncate pr-2 text-[13px] font-semibold text-slate-900">{p.name}</p>
-              <RiskBadge level={p.riskLevel} />
-            </div>
-            <div className="flex w-full items-center justify-between gap-2 lg:hidden">
-              <p className="text-xs text-slate-500">
-                {p.mrn} · {p.age} {p.sex} · {p.lastCheckedAt}
+          {filtered.map((p) => (
+            <button
+              key={p.id}
+              onClick={() => navigate(`/patients/${p.id}`)}
+              className="flex w-full flex-col gap-2 border-b border-slate-200 p-3 text-left last:border-b-0 hover:bg-slate-50 lg:min-w-[900px] lg:flex-row lg:items-center lg:gap-0 lg:px-6 lg:py-3"
+            >
+              <div className="flex w-full items-center justify-between gap-2 lg:hidden">
+                <p className="truncate pr-2 text-[13px] font-semibold text-slate-900">{p.name}</p>
+                <RiskBadge level={p.riskLevel} />
+              </div>
+              <div className="flex w-full items-center justify-between gap-2 lg:hidden">
+                <p className="text-xs text-slate-500">
+                  {p.mrn} · {p.age} {p.sex} · {p.lastCheckedAt}
+                </p>
+                <div className="flex shrink-0 items-center gap-2">
+                  <span className={`text-[13px] font-bold ${riskScoreColor[p.riskLevel]}`}>
+                    {p.riskScore}%
+                  </span>
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      navigate(`/patients/${p.id}`)
+                    }}
+                    className="rounded p-1.5 hover:bg-slate-200"
+                  >
+                    <Eye className="size-3.5 text-slate-500" />
+                  </span>
+                  <span
+                    onClick={(e) => e.stopPropagation()}
+                    className="rounded bg-slate-50 p-1.5 hover:bg-slate-200"
+                  >
+                    <Pencil className="size-3.5 text-slate-500" />
+                  </span>
+                </div>
+              </div>
+
+              <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[120px] lg:shrink-0">
+                {p.mrn}
               </p>
-              <div className="flex shrink-0 items-center gap-2">
-                <span className={`text-[13px] font-bold ${riskScoreColor[p.riskLevel]}`}>
-                  {p.riskScore}%
-                </span>
+              <p className="hidden min-w-[140px] flex-1 truncate pr-2 text-[13px] font-semibold text-slate-900 lg:block">
+                {p.name}
+              </p>
+              <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[70px] lg:shrink-0">
+                {p.age}
+              </p>
+              <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[90px] lg:shrink-0">
+                {p.sex}
+              </p>
+              <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[130px] lg:shrink-0">
+                {p.lastCheckedAt}
+              </p>
+              <div className="hidden lg:block lg:w-[140px] lg:shrink-0">
+                <RiskBadge level={p.riskLevel} />
+              </div>
+              <p
+                className={`hidden text-[13px] font-bold lg:block lg:w-[90px] lg:shrink-0 ${riskScoreColor[p.riskLevel]}`}
+              >
+                {p.riskScore}%
+              </p>
+              <div className="hidden lg:flex lg:w-[90px] lg:shrink-0 lg:items-center lg:justify-end lg:gap-2">
                 <span
                   onClick={(e) => {
                     e.stopPropagation()
@@ -104,44 +147,9 @@ export default function PatientsList() {
                   <Pencil className="size-3.5 text-slate-500" />
                 </span>
               </div>
-            </div>
-
-            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[120px]">{p.mrn}</p>
-            <p className="hidden flex-1 truncate pr-2 text-[13px] font-semibold text-slate-900 lg:block">
-              {p.name}
-            </p>
-            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[70px]">{p.age}</p>
-            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[90px]">{p.sex}</p>
-            <p className="hidden text-[13px] text-slate-600 lg:block lg:w-[130px]">
-              {p.lastCheckedAt}
-            </p>
-            <div className="hidden lg:block lg:w-[140px]">
-              <RiskBadge level={p.riskLevel} />
-            </div>
-            <p
-              className={`hidden text-[13px] font-bold lg:block lg:w-[90px] ${riskScoreColor[p.riskLevel]}`}
-            >
-              {p.riskScore}%
-            </p>
-            <div className="hidden lg:flex lg:w-[90px] lg:items-center lg:justify-end lg:gap-2">
-              <span
-                onClick={(e) => {
-                  e.stopPropagation()
-                  navigate(`/patients/${p.id}`)
-                }}
-                className="rounded p-1.5 hover:bg-slate-200"
-              >
-                <Eye className="size-3.5 text-slate-500" />
-              </span>
-              <span
-                onClick={(e) => e.stopPropagation()}
-                className="rounded bg-slate-50 p-1.5 hover:bg-slate-200"
-              >
-                <Pencil className="size-3.5 text-slate-500" />
-              </span>
-            </div>
-          </button>
-        ))}
+            </button>
+          ))}
+        </div>
 
         {filtered.length === 0 && (
           <p className="w-full px-6 py-8 text-center text-[13px] text-slate-400">
