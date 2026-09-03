@@ -113,30 +113,30 @@ export default function UsersAdmin() {
           </div>
 
           <div className="flex w-full flex-col overflow-x-auto">
-            <div className="flex min-w-[720px] border-b border-slate-200 bg-slate-50 px-3 py-2.5 text-xs font-semibold text-slate-600">
+            <div className="flex min-w-[640px] border-b border-slate-200 bg-slate-50 px-3 py-2.5 text-xs font-semibold text-slate-600">
               <p className="flex-1">User Name &amp; Email</p>
-              <p className="w-[110px]">Role</p>
-              <p className="w-[120px]">Department</p>
-              <p className="w-[70px]">Status</p>
-              <p className="w-[110px]">Last Active</p>
-              <p className="w-[70px]">Actions</p>
+              <p className="w-[100px]">Role</p>
+              <p className="w-[110px]">Department</p>
+              <p className="w-[60px]">Status</p>
+              <p className="w-[95px]">Last Active</p>
+              <p className="w-[60px]">Actions</p>
             </div>
             {filtered.map((user) => (
               <div
                 key={user.id}
-                className="flex min-w-[720px] items-center border-b border-slate-200 p-3 last:border-b-0"
+                className="flex min-w-[640px] items-center border-b border-slate-200 p-3 last:border-b-0"
               >
                 <div className="flex-1">
                   <p className="text-[13px] font-semibold text-slate-900">{user.name}</p>
                   <p className="text-[11px] text-slate-400">{user.email}</p>
                 </div>
-                <div className="w-[110px]">
+                <div className="w-[100px]">
                   <span className={cn('rounded-full px-2 py-1 text-[11px] font-bold', roleStyles[user.role])}>
                     {user.role}
                   </span>
                 </div>
-                <p className="w-[120px] text-[13px] text-slate-600">{user.department}</p>
-                <div className="w-[70px]">
+                <p className="w-[110px] text-[13px] text-slate-600">{user.department}</p>
+                <div className="w-[60px]">
                   {user.status === 'Pending' ? (
                     <span className="rounded-full bg-amber-100 px-2 py-1 text-[11px] font-bold text-amber-600">
                       Pending
@@ -145,8 +145,8 @@ export default function UsersAdmin() {
                     <Switch checked={user.status === 'Active'} onChange={() => toggleStatus(user.id)} />
                   )}
                 </div>
-                <p className="w-[110px] text-xs text-slate-600">{user.lastActive}</p>
-                <button className="w-[70px] text-left text-[13px] font-semibold text-blue-600 hover:underline">
+                <p className="w-[95px] text-xs text-slate-600">{user.lastActive}</p>
+                <button className="w-[60px] text-left text-[13px] font-semibold text-blue-600 hover:underline">
                   Manage
                 </button>
               </div>
